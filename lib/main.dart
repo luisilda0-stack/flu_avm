@@ -12,7 +12,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorSchemeSeed: const Color.fromARGB(255, 66, 177, 69)
+        colorSchemeSeed: const Color.fromARGB(255, 71, 176, 74)
       ) ,
       home: Scaffold(
         appBar: AppBar(
