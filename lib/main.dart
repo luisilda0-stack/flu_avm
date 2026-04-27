@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/config/config.dart';
+import 'package:flutter_application_1/presentation/screens/screens.dart';
+
+
 
 void main() {
   runApp(const MainApp());
@@ -12,20 +16,9 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorSchemeSeed: const Color.fromARGB(255, 71, 176, 74)
-      ) ,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Este es el Home'),
-        ),
-        body: Center(
-          child: FilledButton(
-            onPressed: () { }, 
-            child: Text('Hola mundo!')
-          ),
-        ),
+        primarySwatch: Colors.pink,
       ),
-    );
+      home: DomusScreen(),
+      );
   }
 }
- 
