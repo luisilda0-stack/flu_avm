@@ -1,12 +1,12 @@
 import 'dart:math' as math;
-
+import 'package:flu_avm/config/config.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class DomusScreen extends StatelessWidget {
   const DomusScreen({super.key});
 
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -21,42 +21,46 @@ class _DomusView extends StatelessWidget {
   const _DomusView();
 
   @override
-
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 7,
+      itemCount: appMenuItems.length,
       itemBuilder: (context, index) {
-        return _PropriumListTile();
-      }
+        final menuItem = appMenuItems[index];
+        return _PropriumListTile(menuItem: menuItem);
+      },
     );
   }
 }
 
 class _PropriumListTile extends StatelessWidget {
-  const _PropriumListTile();
+
+  final MenuItem menuItem;
+
+  const _PropriumListTile({required this.menuItem});
 
   @override
-
   Widget build(BuildContext context) {
 
     final colorum = Theme.of(context).colorScheme;
 
     return ListTile(
-      title: Text('Contador'),
-      subtitle: Text('Introducción a Riverpod'),
+      title: Text(menuItem.titulus),
+      subtitle: Text(menuItem.subtitulus),
       trailing: Icon(Icons.arrow_forward_ios_rounded, color: colorum.primary),
       leading: CircleAvatar(
         backgroundColor: Color.fromARGB(100,
-        math.Random().nextInt(255),
-        math.Random().nextInt(255),
-        math.Random().nextInt(255),
+          math.Random().nextInt(255),
+          math.Random().nextInt(255),
+          math.Random().nextInt(255),
         ),
         child: Icon(
-          Icons.add,
+          menuItem.icon,
           color: Colors.black,
         )
       ),
-      onTap: () {},
-    ); 
+      onTap: () {
+        context.push(menuItem.link);
+      },
+    );
   }
 }

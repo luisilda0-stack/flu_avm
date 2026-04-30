@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/config/config.dart';
-import 'package:flutter_application_1/presentation/screens/screens.dart';
-
-
+import 'package:flu_avm/config/config.dart';
 
 void main() {
   runApp(const MainApp());
@@ -13,12 +10,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-      ),
-      home: DomusScreen(),
-      );
+      theme: AppTheme().getTheme(),
+    );
   }
 }
