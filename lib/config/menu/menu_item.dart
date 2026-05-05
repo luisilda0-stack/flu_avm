@@ -18,7 +18,7 @@ const appMenuItems = <MenuItem>[
   MenuItem(
     titulus: 'Contador',
     subtitulus: 'Introducción a Riverpod',
-    link: '/numerator',
+    link: '/numerator-river',
     icon: Icons.add,
   ),
   MenuItem(
@@ -27,10 +27,5 @@ const appMenuItems = <MenuItem>[
     link: '/bands',
     icon: Icons.music_note_outlined,
   ),
-  MenuItem(
-    titulus: 'Ludus',
-    subtitulus: 'Games',
-    link: '/ludus',
-    icon: Icons.videogame_asset,
-  ),
+
 ];

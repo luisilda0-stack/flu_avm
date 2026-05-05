@@ -1,30 +1,33 @@
-import 'package:flu_avm/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class NumeratorScreens extends ConsumerWidget {
-
+class NumeratorScreens extends StatefulWidget {
   const NumeratorScreens({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  State<NumeratorScreens> createState() => _NumeratorScreensState();
+}
 
-    final int clickNumerator = ref.watch(numeratorProvider);
+class _NumeratorScreensState extends State<NumeratorScreens> {
 
+  int counter = 0;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Numerator Screen'),
       ),
       body: Center(
-        child: Text('Valor: $clickNumerator', style: Theme.of(context).textTheme.titleLarge),
+        child: Text('Valor: $counter', style: Theme.of(context).textTheme.titleLarge),
       ),
-    floatingActionButton: FloatingActionButton(
-      onPressed: () {
-        ref.read(numeratorProvider.notifier).state++;
-      },
-       child: Icon(Icons.add),
-    ),
-
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            counter++;
+          });
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }

@@ -2,19 +2,19 @@ import 'package:go_router/go_router.dart';
 import 'package:flu_avm/presentation/screens/screens.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/domus',
+  initialLocation: '/',
   routes: [
     GoRoute(
-      path: '/domus',
+      path: '/',
       builder: (context, state) => const DomusScreen(),
+    ),
+    GoRoute(
+      path: '/numerator-river',
+      builder: (context, state) => const NumeratorScreens(),
     ),
     GoRoute(
       path: '/bands',
       builder: (context, state) => const BandsScreen(),
-    ),
-    GoRoute(
-      path: '/numerator',
-      builder: (context, state) => const NumeratorScreens(),
     ),
   ],
 );

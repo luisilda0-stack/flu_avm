@@ -9,9 +9,6 @@ class BandsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Bandas'),
       ),
-      body: Center(
-        child: Text('Bands Screen'),
-      ),
     );
   }
 }
