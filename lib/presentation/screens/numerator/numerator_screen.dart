@@ -1,34 +1,30 @@
+import 'package:flu_avm/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class NumeratorScreen extends StatefulWidget {
-  const NumeratorScreen ({super.key});
+class NumeratorScreens extends ConsumerWidget {
 
-  @override
-  State<NumeratorScreen> createState() => NumeratorScreenState();
-}
-
-class NumeratorScreenState extends State<NumeratorScreen> {
-
-  int counter = 0; //variable del contador que uniremos a 'valor'
+  const NumeratorScreens({super.key});
 
   @override
+  Widget build(BuildContext context, WidgetRef ref) {
 
-  Widget build(BuildContext context) {
+    final int clickNumerator = ref.watch(numeratorProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Numerator Screen'),
       ),
       body: Center(
-        child: Text('Valor: $counter', style: Theme.of(context).textTheme.titleLarge,),
+        child: Text('Valor: $clickNumerator', style: Theme.of(context).textTheme.titleLarge),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            counter++;
-          });
-        }, //usamos esto para incrementar 'counter'
-        child: Icon(Icons.add),
-      ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () {
+        ref.read(numeratorProvider.notifier).state++;
+      },
+       child: Icon(Icons.add),
+    ),
+
     );
   }
 }

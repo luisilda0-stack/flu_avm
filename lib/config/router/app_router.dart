@@ -14,7 +14,7 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/numerator',
-      builder: (context, state) => const NumeratorScreen(),
+      builder: (context, state) => const NumeratorScreens(),
     ),
   ],
 );
