@@ -26,13 +26,28 @@ class BandsScreen extends StatelessWidget {
     );
   }
 
-  ListTile _bandTile(Band band) {
-    return ListTile(
-      leading: CircleAvatar(
-        child: Text(band.nomen.substring(0, 2).toUpperCase()),
+  Widget _bandTile(Band band) {
+    return Dismissible(
+      key: Key(band.id),
+      direction: DismissDirection.startToEnd,
+      onDismissed: (direction) {
+        print('Borrando ${band.nomen}');
+      },
+      background: Container(
+        padding: EdgeInsets.only(left: 8),
+        color: Colors.red,
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Text('Delete band', style: TextStyle(color: Colors.white)),
+        ),
       ),
-      title: Text(band.nomen),
-      trailing: Text('${ band.numerusVotum }', style: TextStyle(fontSize: 20),),
+      child: ListTile(
+        leading: CircleAvatar(
+          child: Text(band.nomen.substring(0, 2).toUpperCase()),
+        ),
+        title: Text(band.nomen),
+        trailing: Text('${ band.numerusVotum }', style: TextStyle(fontSize: 20)),
+      ),
     );
   }
 }
