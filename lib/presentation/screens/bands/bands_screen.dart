@@ -1,37 +1,38 @@
 import 'package:flu_avm/config/config.dart';
+import 'package:flu_avm/presentation/providers/bands_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class BandsScreen extends StatelessWidget {
+class BandsScreen extends ConsumerWidget {
   const BandsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bands = ref.watch(bandsProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text('Bandas'),
       ),
       body: ListView.builder(
         itemCount: bands.length,
-        itemBuilder: (context, i) {
-          return _bandTile(bands[i]);
-        },
+        itemBuilder: (context, i) => _bandTile(context, ref, bands[i]),
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 1,
-        onPressed: () => addereNovmBan(context),
+        onPressed: () => addereNovmBan(context, ref),
         child: Icon(Icons.add),
       ),
     );
   }
 
-  Widget _bandTile(Band band) {
+  Widget _bandTile(BuildContext context, WidgetRef ref, Band band) {
     return Dismissible(
       key: Key(band.id),
       direction: DismissDirection.startToEnd,
       onDismissed: (direction) {
-        print('Borrando ${band.nomen}');
+        ref.read(bandsProvider.notifier).delereBand(band);
       },
       background: Container(
         padding: EdgeInsets.only(left: 8),
@@ -47,23 +48,26 @@ class BandsScreen extends StatelessWidget {
         ),
         title: Text(band.nomen),
         trailing: Text('${ band.numerusVotum }', style: TextStyle(fontSize: 20)),
+        onTap: () {
+          ref.read(bandsProvider.notifier).addereVotum(band);
+        },
       ),
     );
   }
 }
 
-addereNovmBan(BuildContext context) {
+addereNovmBan(BuildContext context, WidgetRef ref) {
   final TextEditingController textumController = TextEditingController();
 
   showCupertinoDialog(
-    context: context, 
+    context: context,
     builder: (BuildContext context) => CupertinoAlertDialog(
       title: const Text('New band name'),
       content: CupertinoTextField(
         controller: textumController,
         style: TextStyle(
-          color: Theme.of(context).brightness == Brightness.dark 
-            ? Colors.white 
+          color: Theme.of(context).brightness == Brightness.dark
+            ? Colors.white
             : Colors.black
         )
       ),
@@ -72,7 +76,10 @@ addereNovmBan(BuildContext context) {
           isDefaultAction: true,
           child: const Text('Add'),
           onPressed: () {
-            addereBandACollectione(context, textumController.text);
+            ref.read(bandsProvider.notifier).addereBand(
+              Band(id: DateTime.now().toString(), nomen: textumController.text, numerusVotum: 0)
+            );
+            context.pop();
           }
         ),
         CupertinoDialogAction(
@@ -83,10 +90,15 @@ addereNovmBan(BuildContext context) {
       ],
     )
   );
+
 }
 
-addereBandACollectione(BuildContext context, String nomen) {
-  print(nomen);
-  context.pop();
-  bands.add(Band(id: DateTime.now().toString(), nomen: nomen, numerusVotum: 0));
+
+void addereBandCollectione(BuildContext context, WidgetRef ref, String nomen){
+
+  if(nomen.length > 1){
+    ref.read(bandsProvider.notifier).addereBand(
+      Band(id: DateTime.now().toString(), nomen: nomen, numerusVotum: 0)
+    );
+  }
 }
