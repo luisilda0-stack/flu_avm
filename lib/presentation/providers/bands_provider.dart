@@ -1,11 +1,78 @@
 import 'package:flu_avm/config/entities/band.dart';
 import 'package:flutter_riverpod/legacy.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-final bandsProvider = StateNotifierProvider<BandsNotifier, List<Band>>((ref) {
+enum ServerStatus {
+  online,
+  offline,
+  connecting,
+}
+
+final bandsProvider = StateNotifierProvider<BandsNotifier, BandsState>((ref) {
   return BandsNotifier();
 });
 
-class BandsNotifier extends StateNotifier<List<Band>> {
+class BandsState {
+  final ServerStatus serverStatus;
+  final IO.Socket socket;
+  final List<Band> bands;
+
+  BandsState({
+    required this.serverStatus,
+    required this.socket,
+    required this.bands,
+  });
+
+  BandsState copyWith({
+    ServerStatus? serverStatus,
+    IO.Socket? socket,
+    List<Band>? bands,
+  }) {
+    return BandsState(
+      serverStatus: serverStatus ?? this.serverStatus,
+      socket: socket ?? this.socket,
+      bands: bands ?? this.bands,
+    );
+  }
+}
+
+class BandsNotifier extends StateNotifier<BandsState> {
+  BandsNotifier()
+      : super(
+          BandsState(
+            serverStatus: ServerStatus.connecting,
+            socket: IO.io(
+              'http://localhost:3000',
+              IO.OptionBuilder()
+                  .setTransports(['websocket'])
+                  .enableAutoConnect()
+                  .build(),
+            ),
+            bands: [],
+          ),
+        ) {
+    _initConfig();
+  }
+
+  void _initConfig() {
+    state.socket.onConnect((_) {
+      state = state.copyWith(serverStatus: ServerStatus.online);
+    });
+
+    state.socket.onDisconnect((_) {
+      state = state.copyWith(serverStatus: ServerStatus.offline);
+    });
+
+    state.socket.on('active-bands', (data) {
+      final bands = (data as List).map((b) => Band.fromMap(b)).toList();
+      state = state.copyWith(bands: bands);
+    });
+  }
+}
+
+
+
+/*class BandsNotifier extends StateNotifier<List<Band>> {
   BandsNotifier() : super([
     Band(id: '1', nomen: 'Metallica', numerusVotum: 5),
     Band(id: '2', nomen: 'Queen', numerusVotum: 1),
@@ -32,4 +99,7 @@ class BandsNotifier extends StateNotifier<List<Band>> {
   void updateBand(Band band) {
     state = state.map((b) => b.id == band.id ? band : b).toList();
   }
-}
+}*/
+
+
+
