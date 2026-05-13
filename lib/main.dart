@@ -24,7 +24,6 @@ class MainApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme(
         tenebrisModusEst: tenebrisModusEst,
-        electusColor: Colors.pink,
       ).getTheme(),
     );
   }
