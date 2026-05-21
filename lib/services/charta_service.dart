@@ -37,8 +37,8 @@ class ChartaService{
   }
 
   void finire(){
-  _socket?.disconnect();
-  _socket?.dispose();
-}
-
+    _socket!.disconnect();
+    _socket?.dispose();
+    _socket = null;
+  }
 }
