@@ -18,7 +18,7 @@ class BandsScreen extends ConsumerWidget {
         actions: [
           Container(
             margin: EdgeInsets.only(right: 10),
-            child: bandsState.serverStatus == ServerStatus.online
+            child: bandsState.serverStatus == ServerStatus.Online
               ? Icon(Icons.check_circle, color: Colors.blue[300])
               : Icon(Icons.check_circle, color: Colors.red[300]),
           ),
