@@ -1,47 +1,34 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.build/
-.buildlog/
-.history
-.svn/
-.swiftpm/
-migrate_working_dir/
+# Archivos y directorios creados por pub (Dart package manager)
+.dart_tool/
+.packages
+.pub/
+build/
 
-# IntelliJ related
+# Archivos de la IDE (VS Code, Android Studio)
+.idea/
+.vscode/
 *.iml
 *.ipr
 *.iws
-.idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# Archivos generados (build_runner)
+*.g.dart
+*.freezed.dart
+*.gr.dart
 
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
-.dart_tool/
+# Logs y archivos de temporales
+*.log
+.DS_Store
+
+# Documentación generada
+doc/api/
+
+# Configuración local de Flutter
+.flutter-plugins
 .flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
-/coverage/
 
-# Symbolication related
-app.*.symbols
+# Ignorar archivo de entorno si tienes claves privadas
+.env
 
-# Obfuscation related
-app.*.map.json
-
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
-lib/config/secrets.dart
-
+.lib/config/secret.dart
+flu_avm/lib/config/secret.dart
