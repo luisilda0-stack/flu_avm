@@ -1,6 +1,6 @@
 // ignore: library_prefixes, unused_import
 import 'package:flu_avm/config/config.dart';
-import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
+//import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'dart:async';
 

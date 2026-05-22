@@ -1,4 +1,7 @@
-import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
+//import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
+import 'package:flu_avm/config/entities/position.dart';
+
+
 
 class Usor{
   final String id;
