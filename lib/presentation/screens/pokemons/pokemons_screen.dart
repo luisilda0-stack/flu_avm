@@ -11,7 +11,6 @@ class PokemonsScreen extends StatelessWidget {
     return Scaffold(
       body: PokemonVisum(),
     );
-
   }
 }
 
@@ -23,13 +22,10 @@ class PokemonVisum extends ConsumerStatefulWidget {
 }
 
 class _PokemonVisumState extends ConsumerState<PokemonVisum> {
-
   bool oneratusEst = false;
-  
   final scrollController = ScrollController();
 
   @override
-  
   void initState() {
     scrollController.addListener(() {
       if (scrollController.position.pixels + 200 > scrollController.position.maxScrollExtent) {
@@ -57,12 +53,10 @@ class _PokemonVisumState extends ConsumerState<PokemonVisum> {
         ),
         _PokemonGrid()
       ],
-      
     );
   }
 
-  Future vadeProximamPagina() async{
-
+  Future vadeProximamPagina() async {
     if (oneratusEst) return;
     oneratusEst = true;
 
@@ -72,32 +66,27 @@ class _PokemonVisumState extends ConsumerState<PokemonVisum> {
       ...state,
       ...List.generate(30, (index) => (state.length + index + 1))
     ]);
-   
-    oneratusEst = false;
 
+    oneratusEst = false;
     movereScrollAdDescendit();
   }
 
- void movereScrollAdDescendit() {
-  if  (scrollController.position.pixels + 100 <= scrollController.position.maxScrollExtent) return;
+  void movereScrollAdDescendit() {
+    if (scrollController.position.pixels + 100 <= scrollController.position.maxScrollExtent) return;
 
-  scrollController.animateTo(
-    scrollController.position.pixels + 200,
-    duration: const Duration(milliseconds: 300),
-    curve: Curves.fastOutSlowIn,
-  );
- }
+    scrollController.animateTo(
+      scrollController.position.pixels + 200,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
 }
 
 class _PokemonGrid extends ConsumerWidget {
-  
   const _PokemonGrid();
 
   @override
-  
-@override
   Widget build(BuildContext context, WidgetRef ref) {
-    
     final pokemonIds = ref.watch(pokemonIdsProvider);
 
     return SliverGrid.builder(
@@ -106,19 +95,21 @@ class _PokemonGrid extends ConsumerWidget {
         crossAxisSpacing: 2,
         mainAxisSpacing: 2,
       ),
-        itemCount: pokemonIds.length,
+      itemCount: pokemonIds.length,
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
             context.push('/request/${index + 1}');
           },
-          child: Image.network(
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png",
-            fit: BoxFit.contain,
+          child: Container(
+            color: Colors.grey[200],
+            child: Image.network(
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png",
+              fit: BoxFit.contain,
+            ),
           ),
         );
       },
     );
   }
 }
-
