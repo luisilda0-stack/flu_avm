@@ -1,12 +1,18 @@
 import 'package:go_router/go_router.dart';
 import 'package:flu_avm/presentation/screens/screens.dart';
 import 'package:flu_avm/presentation/screens/pokemons/pokemon_screen.dart';
+import 'package:flu_avm/presentation/screens/inicio/inicio_screen.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
   routes: [
     GoRoute(
       path: '/',
+      builder: (context, state) => const InicioScreen(),
+    ),
+
+    GoRoute(
+      path: '/home',
       builder: (context, state) => const DomusScreen(),
     ),
 
@@ -19,12 +25,12 @@ final appRouter = GoRouter(
       path: '/bands',
       builder: (context, state) => const BandsScreen(),
     ),
-  
-  GoRoute(
+
+    GoRoute(
       path: '/charta',
       builder: (context, state) => const ChartaScreen(),
     ),
-    
+
     GoRoute(
       path: '/request',
       builder: (context, state) => const PokemonsScreen(),
@@ -33,10 +39,10 @@ final appRouter = GoRouter(
           path: ':id',
           builder: (context, state) {
             final id = state.pathParameters['id'] ?? '1';
-            return PokemonScreen(pokemonId: id,);
+            return PokemonScreen(pokemonId: id);
           },
-        )
-      ]
+        ),
+      ],
     ),
   ],
 );
