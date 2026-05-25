@@ -32,7 +32,17 @@ class DomusScreen extends ConsumerWidget {
           )
         ],
       ),
-      body: _DomusView(),
+      body: Column(
+        children: [
+Image.asset('assets/images/motril.jpg',
+  height: 350,
+  fit: BoxFit.contain,
+),  // ← coma aquí
+Expanded(
+  child: _DomusView(),
+),
+        ],
+      ),
     );
   }
 }
