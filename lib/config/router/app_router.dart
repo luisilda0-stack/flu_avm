@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flu_avm/presentation/screens/screens.dart';
 import 'package:flu_avm/presentation/screens/pokemons/pokemon_screen.dart';
-import 'package:flu_avm/presentation/screens/inicio/inicio_screen.dart';
+
 
 final appRouter = GoRouter(
   initialLocation: '/',
