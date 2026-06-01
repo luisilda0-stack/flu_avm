@@ -27,19 +27,22 @@ const appMenuItems = <MenuItem>[
     link: '/bands',
     icon: Icons.music_note_outlined,
   ),
-
-    MenuItem(
+  MenuItem(
     titulus: 'Mapas',
     subtitulus: 'Localización de usuarios',
     link: '/charta',
     icon: Icons.map_outlined,
   ),
-
-      MenuItem(
+  MenuItem(
     titulus: 'PokeApi',
     subtitulus: 'Peticiones http a una API',
     link: '/request',
     icon: Icons.catching_pokemon,
   ),
-
+  MenuItem(
+    titulus: 'Mi proyecto: EXTRACCIONES',
+    subtitulus: 'Materiales críticos de la tecnología',
+    link: '/extracciones',
+    icon: Icons.terrain,
+  ),
 ];

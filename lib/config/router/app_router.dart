@@ -44,5 +44,18 @@ final appRouter = GoRouter(
         ),
       ],
     ),
+    GoRoute(
+  path: '/extracciones',
+  builder: (context, state) => const ExtraccionesScreen(),
+  routes: [
+    GoRoute(
+      path: ':mineral',
+      builder: (context, state) {
+        final mineral = state.pathParameters['mineral'] ?? '';
+        return ExtraccionScreen(mineral: mineral);
+      },
+    ),
+  ],
+),
   ],
 );

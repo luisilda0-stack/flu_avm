@@ -33,3 +33,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/litio/
+    - assets/images/coltan/
+    - assets/images/cobalto/
+    - assets/images/silicio/
+    - assets/images/tierras_raras/

@@ -61,7 +61,7 @@ class InicioScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 4),
             const Text(
-              'Aprende a construir apps con datos en tiempo real en Flutter. Dos ejemplos prácticos te esperan dentro.',
+              'Aprende a construir apps con datos en tiempo real en Flutter. Ejemplos prácticos te esperan dentro.',
               style: TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 16),
@@ -94,7 +94,7 @@ class InicioScreen extends ConsumerWidget {
                         child: Image.asset(
                           'assets/images/votaciones.jpg',
                           height: 120,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.contain,
                           width: double.infinity,
                         ),
                       ),
@@ -112,8 +112,7 @@ class InicioScreen extends ConsumerWidget {
               children: [
                 _Badge(texto: '5\nPANTALLAS'),
                 _Badge(texto: '2\nWEBSOCKET'),
-                _Badge(texto: 'FC\nFERNANDO\nCORDÓN'),
-                _Badge(texto: 'LT\nLUISA\nTOVAR'),
+                _Badge(texto: 'MI\nPROYECTO'),
               ],
             ),
             const SizedBox(height: 16),
