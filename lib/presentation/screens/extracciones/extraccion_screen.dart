@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,46 +14,92 @@ class ExtraccionScreen extends StatefulWidget {
 class _ExtraccionScreenState extends State<ExtraccionScreen> {
   int _indiceActual = 0;
   String _filtroActivo = 'Todo';
+  Timer? _timer;
 
   final Map<String, List<Map<String, String>>> _imagenesPorMineral = {
     'Litio': [
-      {'imagen': 'assets/images/litio/litio_1.jpg', 'etiqueta': 'Extracción'},
-      {'imagen': 'assets/images/litio/litio_2.jpg', 'etiqueta': 'Conflictos'},
-      {'imagen': 'assets/images/litio/litio_3.jpg', 'etiqueta': 'Tecnología'},
-      {'imagen': 'assets/images/litio/litio_4.jpg', 'etiqueta': 'Existencia'},
+      {'imagen': 'assets/images/litio/litio_extraccion_1.jpg', 'etiqueta': 'Extracción'},
+      {'imagen': 'assets/images/litio/litio_extraccion_2.jpg', 'etiqueta': 'Extracción'},
+      {'imagen': 'assets/images/litio/litio_extraccion_3.jpg', 'etiqueta': 'Extracción'},
+      {'imagen': 'assets/images/litio/litio_tecnologia_1.jpg', 'etiqueta': 'Tecnología'},
+      {'imagen': 'assets/images/litio/litio_tecnologia_2.jpg', 'etiqueta': 'Tecnología'},
+      {'imagen': 'assets/images/litio/litio_tecnologia_3.jpg', 'etiqueta': 'Tecnología'},
+      {'imagen': 'assets/images/litio/litio_grafico.png', 'etiqueta': 'Existencia - Control'},
     ],
     'Coltán': [
-      {'imagen': 'assets/images/coltan/coltan_1.jpg', 'etiqueta': 'Extracción'},
-      {'imagen': 'assets/images/coltan/coltan_2.jpg', 'etiqueta': 'Conflictos'},
-      {'imagen': 'assets/images/coltan/coltan_3.jpg', 'etiqueta': 'Tecnología'},
-      {'imagen': 'assets/images/coltan/coltan_4.jpg', 'etiqueta': 'Existencia'},
+      {'imagen': 'assets/images/coltan/coltan_extraccion_1.jpg', 'etiqueta': 'Extracción'},
+      {'imagen': 'assets/images/coltan/coltan_extraccion_2.jpg', 'etiqueta': 'Extracción'},
+      {'imagen': 'assets/images/coltan/coltan_extraccion_3.jpg', 'etiqueta': 'Extracción'},
+      {'imagen': 'assets/images/coltan/coltan_tecnologia_1.jpg', 'etiqueta': 'Tecnología'},
+      {'imagen': 'assets/images/coltan/coltan_tecnologia_2.jpg', 'etiqueta': 'Tecnología'},
+      {'imagen': 'assets/images/coltan/coltan_tecnologia_3.jpg', 'etiqueta': 'Tecnología'},
+      {'imagen': 'assets/images/coltan/coltan_grafico.png', 'etiqueta': 'Existencia - Control'},
     ],
     'Cobalto': [
-      {'imagen': 'assets/images/cobalto/cobalto_1.jpg', 'etiqueta': 'Extracción'},
-      {'imagen': 'assets/images/cobalto/cobalto_2.jpg', 'etiqueta': 'Conflictos'},
-      {'imagen': 'assets/images/cobalto/cobalto_3.jpg', 'etiqueta': 'Tecnología'},
-      {'imagen': 'assets/images/cobalto/cobalto_4.jpg', 'etiqueta': 'Existencia'},
+      {'imagen': 'assets/images/cobalto/cobalto_extraccion_1.jpg', 'etiqueta': 'Extracción'},
+      {'imagen': 'assets/images/cobalto/cobalto_extraccion_2.jpg', 'etiqueta': 'Extracción'},
+      {'imagen': 'assets/images/cobalto/cobalto_extraccion_3.jpg', 'etiqueta': 'Extracción'},
+      {'imagen': 'assets/images/cobalto/cobalto_tecnologia_1.jpg', 'etiqueta': 'Tecnología'},
+      {'imagen': 'assets/images/cobalto/cobalto_tecnologia_2.jpg', 'etiqueta': 'Tecnología'},
+      {'imagen': 'assets/images/cobalto/cobalto_tecnologia_3.jpg', 'etiqueta': 'Tecnología'},
+      {'imagen': 'assets/images/cobalto/cobalto_grafico.png', 'etiqueta': 'Existencia - Control'},
     ],
     'Silicio': [
-      {'imagen': 'assets/images/silicio/silicio_1.jpg', 'etiqueta': 'Extracción'},
-      {'imagen': 'assets/images/silicio/silicio_2.jpg', 'etiqueta': 'Conflictos'},
-      {'imagen': 'assets/images/silicio/silicio_3.jpg', 'etiqueta': 'Tecnología'},
-      {'imagen': 'assets/images/silicio/silicio_4.jpg', 'etiqueta': 'Existencia'},
+      {'imagen': 'assets/images/silicio/silicio_extraccion_1.jpg', 'etiqueta': 'Extracción'},
+      {'imagen': 'assets/images/silicio/silicio_extraccion_2.jpg', 'etiqueta': 'Extracción'},
+      {'imagen': 'assets/images/silicio/silicio_extraccion_3.jpg', 'etiqueta': 'Extracción'},
+      {'imagen': 'assets/images/silicio/silicio_tecnologia_1.jpg', 'etiqueta': 'Tecnología'},
+      {'imagen': 'assets/images/silicio/silicio_tecnologia_2.jpg', 'etiqueta': 'Tecnología'},
+      {'imagen': 'assets/images/silicio/silicio_tecnologia_3.jpg', 'etiqueta': 'Tecnología'},
+      {'imagen': 'assets/images/silicio/silicio_grafico.png', 'etiqueta': 'Existencia - Control'},
     ],
     'Tierras Raras': [
-      {'imagen': 'assets/images/tierras_raras/tierras_1.jpg', 'etiqueta': 'Extracción'},
-      {'imagen': 'assets/images/tierras_raras/tierras_2.jpg', 'etiqueta': 'Conflictos'},
-      {'imagen': 'assets/images/tierras_raras/tierras_3.jpg', 'etiqueta': 'Tecnología'},
-      {'imagen': 'assets/images/tierras_raras/tierras_4.jpg', 'etiqueta': 'Existencia'},
+      {'imagen': 'assets/images/tierras_raras/tierras_raras_extraccion_1.jpg', 'etiqueta': 'Extracción'},
+      {'imagen': 'assets/images/tierras_raras/tierras_raras_extraccion_2.jpg', 'etiqueta': 'Extracción'},
+      {'imagen': 'assets/images/tierras_raras/tierras_raras_extraccion_3.jpg', 'etiqueta': 'Extracción'},
+      {'imagen': 'assets/images/tierras_raras/tierras_raras_tecnologia_1.jpg', 'etiqueta': 'Tecnología'},
+      {'imagen': 'assets/images/tierras_raras/tierras_raras_tecnologia_2.jpg', 'etiqueta': 'Tecnología'},
+      {'imagen': 'assets/images/tierras_raras/tierras_raras_tecnologia_3.jpg', 'etiqueta': 'Tecnología'},
+      {'imagen': 'assets/images/tierras_raras/tierras_raras_grafico.png', 'etiqueta': 'Existencia - Control'},
     ],
   };
 
-  final List<String> _filtros = ['Todo', 'Extracción', 'Conflictos', 'Tecnología', 'Existencia'];
+  final List<String> _filtros = ['Todo', 'Extracción', 'Tecnología', 'Existencia - Control'];
 
   List<Map<String, String>> get _imagenesFiltradas {
     final todas = _imagenesPorMineral[widget.mineral] ?? [];
-    if (_filtroActivo == 'Todo') return todas;
+    if (_filtroActivo == 'Todo') {
+      return todas.where((img) => img['etiqueta'] != 'Existencia - Control').toList();
+    }
     return todas.where((img) => img['etiqueta'] == _filtroActivo).toList();
+  }
+
+  void _iniciarTimer() {
+    _timer?.cancel();
+    final imagenes = _imagenesFiltradas;
+    if (imagenes.length <= 1) return;
+    _timer = Timer.periodic(const Duration(milliseconds: 800), (timer) {
+      if (!mounted) return;
+      setState(() {
+        _indiceActual = (_indiceActual + 1) % imagenes.length;
+      });
+    });
+  }
+
+  void _pararTimer() {
+    _timer?.cancel();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _iniciarTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -87,10 +134,13 @@ class _ExtraccionScreenState extends State<ExtraccionScreen> {
                 final filtro = _filtros[index];
                 final activo = filtro == _filtroActivo;
                 return GestureDetector(
-                  onTap: () => setState(() {
-                    _filtroActivo = filtro;
-                    _indiceActual = 0;
-                  }),
+                  onTap: () {
+                    setState(() {
+                      _filtroActivo = filtro;
+                      _indiceActual = 0;
+                    });
+                    _iniciarTimer();
+                  },
                   child: Container(
                     margin: const EdgeInsets.only(right: 8),
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -118,13 +168,9 @@ class _ExtraccionScreenState extends State<ExtraccionScreen> {
             Expanded(
               flex: 3,
               child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _indiceActual = (_indiceActual + 1) % imagenes.length;
-                  });
-                },
+                onTap: _pararTimer,
                 child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 200),
+                  duration: const Duration(milliseconds: 300),
                   transitionBuilder: (child, animation) => FadeTransition(
                     opacity: animation,
                     child: child,
@@ -151,17 +197,52 @@ class _ExtraccionScreenState extends State<ExtraccionScreen> {
               ),
             ),
 
-          // Etiqueta de la imagen actual
+          if (imagenes.isEmpty)
+            Expanded(
+              flex: 3,
+              child: Center(
+                child: Text(
+                  'Sin imágenes',
+                  style: GoogleFonts.cormorantGaramond(
+                    color: Colors.white38,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ),
+
+          // Etiqueta + control play/pause
           if (imagenes.isNotEmpty)
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Text(
-                imagenes[_indiceActual]['etiqueta']!,
-                style: GoogleFonts.sofiaSans(
-                  color: Colors.white54,
-                  fontSize: 12,
-                  letterSpacing: 2,
-                ),
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    imagenes[_indiceActual]['etiqueta']!,
+                    style: GoogleFonts.sofiaSans(
+                      color: Colors.white54,
+                      fontSize: 11,
+                      letterSpacing: 2,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  GestureDetector(
+                    onTap: () {
+                      if (_timer?.isActive ?? false) {
+                        _pararTimer();
+                      } else {
+                        _iniciarTimer();
+                      }
+                      setState(() {});
+                    },
+                    child: Icon(
+                      (_timer?.isActive ?? false) ? Icons.pause_circle_outline : Icons.play_circle_outline,
+                      color: Colors.white38,
+                      size: 20,
+                    ),
+                  ),
+                ],
               ),
             ),
 
@@ -180,7 +261,10 @@ class _ExtraccionScreenState extends State<ExtraccionScreen> {
                 itemBuilder: (context, index) {
                   final seleccionada = index == _indiceActual;
                   return GestureDetector(
-                    onTap: () => setState(() => _indiceActual = index),
+                    onTap: () {
+                      setState(() => _indiceActual = index);
+                      _pararTimer();
+                    },
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 150),
                       decoration: BoxDecoration(
