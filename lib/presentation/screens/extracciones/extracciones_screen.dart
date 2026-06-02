@@ -6,11 +6,11 @@ class ExtraccionesScreen extends StatelessWidget {
   const ExtraccionesScreen({super.key});
 
   final List<Map<String, dynamic>> minerales = const [
-  {'nombre': 'Litio', 'imagen': 'assets/images/litio.jpg'},
-  {'nombre': 'Coltán', 'imagen': 'assets/images/coltan.jpg'},
-  {'nombre': 'Cobalto', 'imagen': 'assets/images/cobalto.jpg'},
-  {'nombre': 'Silicio', 'imagen': 'assets/images/silicio.jpg'},
-  {'nombre': 'Tierras Raras', 'imagen': 'assets/images/tierras_raras.jpg'},
+    {'nombre': 'Litio', 'imagen': 'assets/images/litio.jpg'},
+    {'nombre': 'Coltán', 'imagen': 'assets/images/coltan.jpg'},
+    {'nombre': 'Cobalto', 'imagen': 'assets/images/cobalto.jpg'},
+    {'nombre': 'Silicio', 'imagen': 'assets/images/silicio.jpg'},
+    {'nombre': 'Tierras Raras', 'imagen': 'assets/images/tierras_raras.jpg'},
   ];
 
   @override
@@ -54,9 +54,12 @@ class ExtraccionesScreen extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    Image.asset(
-                      mineral['imagen'],
-                      fit: BoxFit.contain,
+                    Hero(
+                      tag: 'mineral_${mineral['nombre']}',
+                      child: Image.asset(
+                        mineral['imagen'],
+                        fit: BoxFit.contain,
+                      ),
                     ),
                     Align(
                       alignment: Alignment.bottomLeft,

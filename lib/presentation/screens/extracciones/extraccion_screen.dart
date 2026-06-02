@@ -108,7 +108,7 @@ class _ExtraccionScreenState extends State<ExtraccionScreen> {
           widget.mineral,
           style: GoogleFonts.cormorantGaramond(
             color: Colors.white,
-            fontSize: 20,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -206,31 +206,34 @@ class _ExtraccionScreenState extends State<ExtraccionScreen> {
             ),
           ),
 
-          // Imagen animada principal
+          // Imagen animada principal con Hero
           if (imagenes.isNotEmpty)
             Expanded(
               flex: 3,
               child: GestureDetector(
                 onTap: _pararTimer,
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  transitionBuilder: (child, animation) => FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  ),
-                  child: Image.asset(
-                    imagenes[_indiceActual]['imagen']!,
-                    key: ValueKey(imagenes[_indiceActual]['imagen']),
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      color: Colors.grey[900],
-                      child: Center(
-                        child: Text(
-                          imagenes[_indiceActual]['etiqueta']!,
-                          style: GoogleFonts.cormorantGaramond(
-                            color: Colors.white38,
-                            fontSize: 20,
+                child: Hero(
+                  tag: 'mineral_${widget.mineral}',
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    transitionBuilder: (child, animation) => FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    ),
+                    child: Image.asset(
+                      imagenes[_indiceActual]['imagen']!,
+                      key: ValueKey(imagenes[_indiceActual]['imagen']),
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: Colors.grey[900],
+                        child: Center(
+                          child: Text(
+                            imagenes[_indiceActual]['etiqueta']!,
+                            style: GoogleFonts.cormorantGaramond(
+                              color: Colors.white38,
+                              fontSize: 20,
+                            ),
                           ),
                         ),
                       ),
