@@ -5,7 +5,6 @@ import 'package:flu_avm/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DomusScreen extends ConsumerWidget {
   const DomusScreen({super.key});
@@ -17,20 +16,6 @@ class DomusScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Flu Avm App'),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(20),
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Text(
-              '5 minerales críticos documentados',
-              style: GoogleFonts.sofiaSans(
-                fontSize: 11,
-                color: Colors.grey,
-                letterSpacing: 1.2,
-              ),
-            ),
-          ),
-        ),
         actions: [
           IconButton(
             onPressed: () {

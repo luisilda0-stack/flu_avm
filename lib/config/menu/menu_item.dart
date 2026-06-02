@@ -42,7 +42,7 @@ const appMenuItems = <MenuItem>[
   MenuItem(
     titulus: 'Mi proyecto: EXTRACCIONES',
     subtitulus: 'Materiales críticos de la tecnología',
-    link: '/extracciones',
+    link: '/extracciones-intro',
     icon: Icons.terrain,
   ),
 ];
