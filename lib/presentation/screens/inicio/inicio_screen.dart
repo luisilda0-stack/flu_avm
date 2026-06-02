@@ -2,6 +2,7 @@ import 'package:flu_avm/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InicioScreen extends ConsumerWidget {
   const InicioScreen({super.key});
@@ -34,6 +35,10 @@ class InicioScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
+            const SizedBox(height: 8),
+
+            // Row imágenes móvil + puntos + servidor
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -42,7 +47,10 @@ class InicioScreen extends ConsumerWidget {
                 Expanded(child: Image.asset('assets/images/servidor.png', height: 80, fit: BoxFit.contain)),
               ],
             ),
-            const SizedBox(height: 16),
+
+            const SizedBox(height: 28),
+
+            // Badge CONECTADO
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
@@ -54,17 +62,26 @@ class InicioScreen extends ConsumerWidget {
                 style: TextStyle(color: Colors.white, fontSize: 12),
               ),
             ),
-            const SizedBox(height: 8),
-            const Text(
+
+            const SizedBox(height: 12),
+
+            // Título y subtítulo
+            Text(
               'WebSockets en vivo',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: GoogleFonts.cormorantGaramond(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            const SizedBox(height: 4),
-            const Text(
-              'Aprende a construir apps con datos en tiempo real en Flutter. Ejemplos prácticos te esperan dentro.',
-              style: TextStyle(fontSize: 14),
+            const SizedBox(height: 8),
+            Text(
+              'Aprende a construir apps con datos en tiempo real en Flutter. Dos ejemplos prácticos te esperan dentro.',
+              style: GoogleFonts.sofiaSans(fontSize: 14),
             ),
-            const SizedBox(height: 16),
+
+            const SizedBox(height: 28),
+
+            // Row tarjetas Mapas + Votaciones
             Row(
               children: [
                 Expanded(
@@ -79,9 +96,18 @@ class InicioScreen extends ConsumerWidget {
                           width: double.infinity,
                         ),
                       ),
-                      const SizedBox(height: 4),
-                      const Text('Mapas', style: TextStyle(fontWeight: FontWeight.bold)),
-                      const Text('Ubicación en tiempo real', style: TextStyle(fontSize: 12)),
+                      const SizedBox(height: 6),
+                      Text(
+                        'Mapas',
+                        style: GoogleFonts.cormorantGaramond(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Ubicación en tiempo real',
+                        style: GoogleFonts.sofiaSans(fontSize: 12),
+                      ),
                     ],
                   ),
                 ),
@@ -98,15 +124,27 @@ class InicioScreen extends ConsumerWidget {
                           width: double.infinity,
                         ),
                       ),
-                      const SizedBox(height: 4),
-                      const Text('Votaciones', style: TextStyle(fontWeight: FontWeight.bold)),
-                      const Text('Gráfico que se actualiza', style: TextStyle(fontSize: 12)),
+                      const SizedBox(height: 6),
+                      Text(
+                        'Votaciones',
+                        style: GoogleFonts.cormorantGaramond(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Gráfico que se actualiza',
+                        style: GoogleFonts.sofiaSans(fontSize: 12),
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+
+            const SizedBox(height: 28),
+
+            // Row badges
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -115,7 +153,10 @@ class InicioScreen extends ConsumerWidget {
                 _Badge(texto: 'MI\nPROYECTO'),
               ],
             ),
-            const SizedBox(height: 16),
+
+            const SizedBox(height: 32),
+
+            // Botón Comenzar
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -123,6 +164,9 @@ class InicioScreen extends ConsumerWidget {
                 child: const Text('→ Comenzar'),
               ),
             ),
+
+            const SizedBox(height: 24),
+
           ],
         ),
       ),
@@ -146,7 +190,10 @@ class _Badge extends StatelessWidget {
       child: Text(
         texto,
         textAlign: TextAlign.center,
-        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+        style: GoogleFonts.sofiaSans(
+          fontWeight: FontWeight.bold,
+          fontSize: 12,
+        ),
       ),
     );
   }
