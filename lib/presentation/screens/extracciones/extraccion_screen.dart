@@ -64,6 +64,14 @@ class _ExtraccionScreenState extends State<ExtraccionScreen> {
     ],
   };
 
+  final Map<String, String> _frases = {
+    'Litio': 'Bolivia tiene las mayores reservas del mundo y produce menos del 1% del suministro global. El triángulo del litio alimenta la transición energética del norte mientras el sur extrae y no decide.',
+    'Coltán': 'El 70% del coltán mundial sale del Congo. Financia guerras que no aparecen en las noticias del móvil que fabricó.',
+    'Cobalto': 'China refina el 70% del cobalto mundial. La batería de tu portátil pasó por sus manos antes que por las tuyas.',
+    'Silicio': 'El silicio es el segundo elemento más abundante de la corteza terrestre. El problema no es que falte, es quién controla convertirlo en chip.',
+    'Tierras Raras': 'China produce 240.000 toneladas al año y controla el 100% del refinado de algunas de ellas. Sin tierras raras no hay imanes, motores eléctricos ni turbinas eólicas.',
+  };
+
   final List<String> _filtros = ['Todo', 'Extracción', 'Tecnología', 'Existencia - Control'];
 
   List<Map<String, String>> get _imagenesFiltradas {
@@ -88,6 +96,41 @@ class _ExtraccionScreenState extends State<ExtraccionScreen> {
 
   void _pararTimer() {
     _timer?.cancel();
+  }
+
+  void _mostrarReflexion(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFF1A1A1A),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Text(
+          widget.mineral,
+          style: GoogleFonts.cormorantGaramond(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        content: Text(
+          _frases[widget.mineral] ?? '',
+          style: GoogleFonts.sofiaSans(
+            color: Colors.white70,
+            fontSize: 14,
+            height: 1.6,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              'Cerrar',
+              style: GoogleFonts.sofiaSans(color: Colors.white54),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -237,7 +280,9 @@ class _ExtraccionScreenState extends State<ExtraccionScreen> {
                       setState(() {});
                     },
                     child: Icon(
-                      (_timer?.isActive ?? false) ? Icons.pause_circle_outline : Icons.play_circle_outline,
+                      (_timer?.isActive ?? false)
+                          ? Icons.pause_circle_outline
+                          : Icons.play_circle_outline,
                       color: Colors.white38,
                       size: 20,
                     ),
@@ -290,7 +335,31 @@ class _ExtraccionScreenState extends State<ExtraccionScreen> {
               ),
             ),
 
-          const SizedBox(height: 16),
+          // Botón reflexión
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+            child: SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                onPressed: () => _mostrarReflexion(context),
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: Colors.white24),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: Text(
+                  '— leer más',
+                  style: GoogleFonts.sofiaSans(
+                    color: Colors.white54,
+                    fontSize: 13,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+              ),
+            ),
+          ),
+
         ],
       ),
     );
